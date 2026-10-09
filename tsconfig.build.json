@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    ".repos",
+    ".open-next",
+    ".next-pages",
+    "out",
+    ".next/dev"
+  ]
+}
