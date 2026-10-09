@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown, ListTree, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,27 +22,78 @@ export function sectionTitle(section: Section) {
 }
 function ContentsList({
   sections,
-  text,
+  searchAsset,
   active,
   onSelect,
 }: {
   sections: Section[];
-  text: string;
+  searchAsset: string;
   active?: string;
   onSelect: (id: string) => void;
 }) {
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const groups = groupChapters(sections).map((group) => ({
-    root: group.root,
-    children: group.sections.filter((section) => section.id !== group.root.id),
-  }));
-  const matches = (section: Section) =>
-    !query.trim() ||
-    `${section.label} ${text.slice(section.start, section.end)}`
-      .toLowerCase()
-      .includes(query.trim().toLowerCase());
-  const visible = sections.filter(matches);
+  const worker = useRef<Worker>(null);
+  const sequence = useRef(0);
+  const [result, setResult] = useState<{
+    query: string;
+    matches: string[];
+    error?: string;
+  }>({ query: "", matches: [] });
+  const term = query.trim().toLowerCase();
+  useEffect(() => () => worker.current?.terminate(), []);
+  useEffect(() => {
+    const request = ++sequence.current;
+    if (!term) return;
+    Promise.resolve()
+      .then(() => {
+        worker.current ??= new Worker("/search-worker.js");
+        worker.current.onmessage = ({ data }) => {
+          if (data.request === sequence.current)
+            setResult({
+              query: term,
+              matches: data.matches ?? [],
+              error: data.error,
+            });
+        };
+        worker.current.onerror = () =>
+          setResult({
+            query: term,
+            matches: [],
+            error: "Full-text search unavailable. Showing title matches.",
+          });
+        worker.current.postMessage({
+          query: term,
+          request,
+          asset: searchAsset,
+        });
+      })
+      .catch(() =>
+        setResult({
+          query: term,
+          matches: [],
+          error: "Full-text search unavailable. Showing title matches.",
+        }),
+      );
+  }, [searchAsset, term]);
+  const groups = useMemo(
+    () =>
+      groupChapters(sections).map((group) => ({
+        root: group.root,
+        children: group.sections.filter(
+          (section) => section.id !== group.root.id,
+        ),
+      })),
+    [sections],
+  );
+  const visible = useMemo(() => {
+    if (!term) return sections;
+    const matches = new Set(result.query === term ? result.matches : []);
+    return sections.filter(
+      (section) =>
+        matches.has(section.id) || section.label.toLowerCase().includes(term),
+    );
+  }, [result, sections, term]);
   function item(section: Section, child = false) {
     return (
       <button
@@ -63,7 +114,7 @@ function ContentsList({
     );
   }
   return (
-    <div className="flex min-h-0 flex-col">
+    <div className="flex h-full min-h-0 flex-col">
       <div className="mb-5 flex items-center justify-between">
         <h2 className="text-sm font-semibold">On this page</h2>
         <span className="font-mono text-xs text-muted-foreground">
@@ -82,7 +133,7 @@ function ContentsList({
       </label>
       <nav
         aria-label="Table of contents"
-        className="min-h-0 max-h-[calc(100svh-230px)] space-y-1 overflow-y-auto overscroll-contain pr-1"
+        className="min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain pr-1"
       >
         {query.trim()
           ? visible.map((section) => item(section))
@@ -127,18 +178,20 @@ function ContentsList({
           </p>
         )}
       </nav>
-      {query.trim() && (
-        <p className="mt-3 text-xs text-muted-foreground">
-          {visible.length} matching sections
+      {term && (
+        <p role="status" className="mt-3 text-xs text-muted-foreground">
+          {result.query !== term
+            ? "Searching prompt…"
+            : (result.error ?? `${visible.length} matching sections`)}
         </p>
       )}
     </div>
   );
 }
-export function Contents(props: {
+export const Contents = memo(function Contents(props: {
   placement?: "rail" | "toolbar";
   sections: Section[];
-  text: string;
+  searchAsset: string;
   active?: string;
   onSelect: (id: string) => void;
 }) {
@@ -150,7 +203,7 @@ export function Contents(props: {
         aria-label="Document navigation"
         className="hidden h-full lg:block"
       >
-        <div className="sticky top-24 border-l pl-6">
+        <div className="h-full">
           <ContentsList {...props} />
         </div>
       </aside>
@@ -183,7 +236,7 @@ export function Contents(props: {
                 Find a section in this prompt.
               </DialogDescription>
             </DialogHeader>
-            <div className="mt-7">
+            <div className="mt-7 min-h-0 h-[calc(100svh-100px)]">
               <ContentsList
                 {...props}
                 onSelect={(id) => {
@@ -198,4 +251,4 @@ export function Contents(props: {
       </div>
     </>
   );
-}
+});

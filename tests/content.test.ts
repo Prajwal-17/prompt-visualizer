@@ -1,13 +1,96 @@
+import {
+  documentSchema,
+  readerIndexSchema,
+  sectionBatchSchema,
+} from "../lib/content/schema";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { extractSections, measureCategories } from "../lib/content/parse";
 import { catalog } from "../lib/content/catalog";
-import { dataHref, rawHref, documentSchema } from "../lib/content/types";
+import { dataHref, rawHref } from "../lib/content/types";
 import { measureTokens, literalTextOptions } from "../lib/content/tokenize";
 import { countTokens } from "gpt-tokenizer/encoding/o200k_base";
 import { auditSource } from "../lib/content/audit";
+import { readerAssetHref } from "../lib/content/reader-assets";
+import { renderMarkdown } from "../scripts/render-markdown";
+
+test("compiled reader assets cover every section and exclude raw text from the index", async () => {
+  for (const capture of catalog) {
+    const index = readerIndexSchema.parse(
+      JSON.parse(await readFile(`public${readerAssetHref(capture)}`, "utf8")),
+    );
+    assert.equal(index.id, capture.id);
+    assert.equal(index.sha256, capture.sha256);
+    assert.equal(index.sections.length, capture.sectionCount);
+    assert.equal("raw" in index, false);
+    assert.equal("text" in index, false);
+    const fragments = [];
+    const expanded: Record<string, string> = {};
+    for (let i = 0; i < index.sections.length; i += index.batchSize) {
+      const batch = sectionBatchSchema.parse(
+        JSON.parse(
+          await readFile(
+            `public${readerAssetHref(capture, `batch-${i / index.batchSize}`)}`,
+            "utf8",
+          ),
+        ),
+      );
+      assert.equal(batch.id, capture.id);
+      assert.equal(batch.sha256, capture.sha256);
+      fragments.push(...batch.sections);
+      for (const fragment of batch.sections.filter(
+        (section) => section.expandable,
+      )) {
+        const complete = sectionBatchSchema.parse(
+          JSON.parse(
+            await readFile(
+              `public${readerAssetHref(capture, fragment.id)}`,
+              "utf8",
+            ),
+          ),
+        );
+        expanded[fragment.id] = complete.sections[0].html;
+        assert.ok(complete.sections[0].html.length > fragment.html.length);
+      }
+    }
+    assert.deepEqual(
+      fragments.map((section) => section.id),
+      index.sections.map((section) => section.id),
+    );
+    const search = JSON.parse(
+      await readFile(`public${readerAssetHref(capture, "search")}`, "utf8"),
+    );
+    assert.deepEqual(
+      search.map((section: { id: string }) => section.id),
+      index.sections.map((section) => section.id),
+    );
+    const hash = createHash("sha256")
+      .update(JSON.stringify({ index, fragments, expanded, search }))
+      .digest("hex");
+    assert.equal(hash, capture.readerHash);
+  }
+});
+
+test("compiled Markdown keeps hostile source inert and resolves section links", () => {
+  const text =
+    '[unsafe](javascript:alert%281%29)\n\n<script>alert(1)</script>\n\n<img src="x" onerror="alert(1)">\n\n![external](https://example.com/image.png)\n\n```html\n<script>alert(1)</script>\n```\n\n[Final answer](#final-answer)';
+  const html = renderMarkdown(
+    text,
+    { sourceUrl: "https://github.com/example/prompt.md" },
+    {
+      sections: extractSections(
+        "# Identity\nHello.\n# Final answer\nBe clear.",
+      ),
+    },
+  );
+  assert.doesNotMatch(html, /<script|<img|javascript:|onerror=/i);
+  assert.match(html, /&lt;script&gt;alert/);
+  assert.match(html, /Image in source: external/);
+  assert.match(html, /href="#section-2"/);
+  assert.match(html, /data-copy-code/);
+});
 
 test("whole-document token attribution handles Unicode and literal special-token strings", () => {
   const raw =

@@ -442,3 +442,108 @@ test("Contents stays reachable and reselecting the active section returns focus"
   const destination = await page.locator("#section-2").boundingBox();
   expect(destination!.y).toBeGreaterThanOrEqual(toolbar!.y + toolbar!.height);
 });
+
+test("Contents docks at the right edge and preserves its resized width", async ({
+  page,
+}) => {
+  await page.goto("/prompts/openai/codex--gpt-6.1-sol--runtime/");
+  const separator = page.getByRole("separator", {
+    name: "Resize table of contents",
+  });
+  if ((page.viewportSize()?.width ?? 0) < 1024) {
+    await expect(separator).toBeHidden();
+    await page.getByRole("button", { name: "Open table of contents" }).click();
+    await expect(
+      page.getByRole("textbox", { name: "Search contents" }),
+    ).toBeVisible();
+    await page.keyboard.press("Escape");
+    return;
+  }
+  const panel = page.locator("#reader-contents-panel");
+  const initial = (await panel.boundingBox())!;
+  expect(initial.x + initial.width).toBe(page.viewportSize()!.width);
+  expect(initial.width).toBe(320);
+  const handle = (await separator.boundingBox())!;
+  await page.mouse.move(handle.x + handle.width / 2, handle.y + 200);
+  await page.mouse.down();
+  await page.mouse.move(handle.x + handle.width / 2 - 80, handle.y + 200, {
+    steps: 8,
+  });
+  await page.mouse.up();
+  await expect(separator).toHaveAttribute("aria-valuenow", "400");
+  await page.reload();
+  await expect(separator).toHaveAttribute("aria-valuenow", "400");
+  await separator.focus();
+  await separator.press("ArrowRight");
+  await expect(separator).toHaveAttribute("aria-valuenow", "384");
+  const resized = (await panel.boundingBox())!;
+  const reader = (await page.locator(".reader-main").boundingBox())!;
+  expect(reader.x + reader.width).toBeLessThanOrEqual(resized.x);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+});
+
+test("large continuous reading loads nearby batches and searches text in a worker", async ({
+  page,
+}) => {
+  const capture = catalog.find(
+    (item) => item.id === "openai--codex--gpt-6.1-sol--runtime",
+  )!;
+  const requests: string[] = [];
+  const workers: string[] = [];
+  page.context().on("request", (request) => {
+    if (new URL(request.url()).pathname.startsWith("/data/"))
+      requests.push(new URL(request.url()).pathname);
+  });
+  page.on("worker", (worker) => workers.push(worker.url()));
+  const response = await page.goto(
+    "/prompts/openai/codex--gpt-6.1-sol--runtime/",
+  );
+  expect((await response!.body()).length).toBeLessThan(300000);
+  await page.getByRole("button", { name: "Continuous", exact: true }).click();
+  await expect(page.locator("article.source-section")).toHaveCount(
+    capture.sectionCount,
+  );
+  expect(
+    await page.locator('article[data-loaded="true"]').count(),
+  ).toBeLessThan(40);
+  const last = page.locator("article.source-section").last();
+  await last.scrollIntoViewIfNeeded();
+  await expect(last).toHaveAttribute("data-loaded", "true");
+  expect(requests).not.toContain(dataHref(capture));
+  expect(requests.some((path) => path.endsWith(".txt"))).toBe(false);
+  expect(workers).toEqual([]);
+  if ((page.viewportSize()?.width ?? 0) < 1024)
+    await page.getByRole("button", { name: "Open table of contents" }).click();
+  await page
+    .getByRole("textbox", { name: "Search contents" })
+    .fill("responses may not excessively quote");
+  await expect(
+    page.getByRole("navigation", { name: "Table of contents" }),
+  ).toContainText(/Word limits/i);
+  expect(workers.some((url) => url.endsWith("/search-worker.js"))).toBe(true);
+});
+
+test("a failed section batch can retry and retain the deep-link destination", async ({
+  page,
+}) => {
+  let failed = false;
+  await page.route("**/batch-48.json", (route) => {
+    if (!failed) {
+      failed = true;
+      return route.fulfill({ status: 503, body: "Unavailable" });
+    }
+    return route.continue();
+  });
+  await page.goto("/prompts/openai/codex--gpt-6.1-sol--runtime/#section-386");
+  const section = page.locator("#section-386");
+  await expect(section.getByRole("alert")).toContainText("503");
+  await section.getByRole("button", { name: "Try again" }).click();
+  await expect(section).toHaveAttribute("data-loaded", "true");
+  await expect(section).toContainText("Responses may not excessively quote");
+  await expect(section).toBeFocused();
+  expect(failed).toBe(true);
+});

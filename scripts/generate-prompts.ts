@@ -1,3 +1,4 @@
+import { captureSchema, documentSchema } from "../lib/content/schema";
 import { readFile, writeFile, mkdir, readdir, rm } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
@@ -5,9 +6,8 @@ import { z } from "zod";
 import { extractSections, measureCategories } from "../lib/content/parse";
 import { measureTokens } from "../lib/content/tokenize";
 import { auditSource } from "../lib/content/audit";
+import { generateReaderAssets } from "./render-markdown";
 import {
-  captureSchema,
-  documentSchema,
   dataHref,
   rawHref,
   categoryIds,
@@ -212,6 +212,7 @@ for (const entry of selection) {
       : "Text";
   const meta = captureSchema.parse({
     id,
+    readerHash: "0".repeat(64),
     provider: entry.provider,
     providerSlug,
     slug,
@@ -269,6 +270,7 @@ for (const entry of selection) {
     throw new Error(`Token accounting failed: ${entry.file}`);
   await writeFile(path.join(root, "public", dataHref(meta)), documentJson);
   await writeFile(path.join(root, "public", rawHref(meta)), rawBuffer);
+  meta.readerHash = await generateReaderAssets(meta, document, output);
   catalog.push(meta);
 }
 await writeFile(
@@ -284,6 +286,13 @@ const expected = new Set(
 for (const file of await readdir(output)) {
   if (!expected.has(file) && /\.(json|txt)$/.test(file))
     await rm(path.join(output, file));
+}
+const readerDirectories = new Set(
+  catalog.map((meta) => `${meta.id}.${meta.readerHash.slice(0, 12)}`),
+);
+for (const directory of await readdir(path.join(output, "reader"))) {
+  if (!readerDirectories.has(directory))
+    await rm(path.join(output, "reader", directory), { recursive: true });
 }
 const old = new Map(previous.map((meta) => [meta.id, meta.sha256]));
 const changed = catalog.filter(

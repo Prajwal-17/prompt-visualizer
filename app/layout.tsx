@@ -28,7 +28,7 @@ export default function RootLayout({
               Skip to content
             </a>
             <Header />
-            <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1480px]">
+            <div className="flex min-h-[calc(100svh-4rem)]">
               <main id="main-content" className="min-w-0 flex-1">
                 {children}
               </main>

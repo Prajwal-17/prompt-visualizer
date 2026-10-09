@@ -1,10 +1,12 @@
+import { readerIndexSchema, sectionBatchSchema } from "./schema";
 import "server-only";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-import { documentSchema, dataHref, type Capture } from "./types";
+import { type Capture } from "./types";
+import { readerAssetHref } from "./reader-assets";
 
-export async function loadDocument(capture: Capture) {
+async function loadAsset(capture: Capture, asset: string) {
   let assets: { fetch(request: Request): Promise<Response> } | undefined;
   if (process.env.NEXT_PUBLIC_DEPLOY_TARGET !== "pages") {
     try {
@@ -18,7 +20,7 @@ export async function loadDocument(capture: Capture) {
   let payload: unknown;
   if (assets) {
     const response = await assets.fetch(
-      new Request(`https://assets.internal${dataHref(capture)}`),
+      new Request(`https://assets.internal${readerAssetHref(capture, asset)}`),
     );
     if (!response.ok)
       throw new Error(
@@ -28,13 +30,26 @@ export async function loadDocument(capture: Capture) {
   } else {
     payload = JSON.parse(
       await readFile(
-        path.join(process.cwd(), "public", dataHref(capture)),
+        path.join(process.cwd(), "public", readerAssetHref(capture, asset)),
         "utf8",
       ),
     );
   }
-  const document = documentSchema.parse(payload);
-  if (document.id !== capture.id || document.sha256 !== capture.sha256)
+  return payload;
+}
+export async function loadReader(capture: Capture) {
+  const [index, batch] = await Promise.all([
+    loadAsset(capture, "index"),
+    loadAsset(capture, "batch-0"),
+  ]);
+  const document = readerIndexSchema.parse(index);
+  const initialBatch = sectionBatchSchema.parse(batch);
+  if (
+    document.id !== capture.id ||
+    document.sha256 !== capture.sha256 ||
+    initialBatch.id !== capture.id ||
+    initialBatch.sha256 !== capture.sha256
+  )
     throw new Error(`Document identity mismatch: ${capture.id}`);
-  return document;
+  return { document, initialBatch };
 }
