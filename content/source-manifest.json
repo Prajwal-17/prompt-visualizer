@@ -1,0 +1,921 @@
+{
+  "commit": "e31ec211bc24a2816b03470c61eb7f513c710d2a",
+  "files": [
+    {
+      "sourcePath": "Anthropic/anthropic_reminders.md",
+      "sha256": "abb9046b4bcb1394ab3c267c11672c8a818a4c9fc4e694f3fa23a4222aa1d1af"
+    },
+    {
+      "sourcePath": "Anthropic/anthropic-interviewer.md",
+      "sha256": "103fdb2df02e6c56ada30f6d25d1f9e18d44bc4d7b3077b044ef61627980f6bc"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-cloud-fable-5.1.md",
+      "sha256": "a51e2376a001d5708b00762440d065e689a264b4de4f7f3ba55cd72f2b1ba863"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-desktop-fable-5.1.md",
+      "sha256": "8f4fd957cf6a223dc43391d3140fc8315a1efd70d8a9a13cd3052e9e3583ec17"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-desktop-fable-5.md",
+      "sha256": "792929a95eb258570d54243a30da60f3bfe238f500e15e7e3d543816bbc22184"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-docs-assistant.md",
+      "sha256": "cd03510e7552d520b6f4f174c3d75bc735abd675b526dab78f534f6c5dbc6d2f"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-fable-5.1.md",
+      "sha256": "a36b6da87e6b0ff0a421fa6bae93c18f43fbc03c9a3a604f9adc13704d9d96d0"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-fable-5.md",
+      "sha256": "8b663a4c2203c63c5ccf29f7dcf264351cdb0a1402a6e7facb6f3222091d0944"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-haiku-4.5.md",
+      "sha256": "371e9ba9fa2af3733cb226f4d3b42fa3315fdfea66cecaefa49e4b42ea941645"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-haiku-5.5.md",
+      "sha256": "55c41c571a05b0d1378c4adf7546eb3a8f10274873963e28cc279707bcc4b627"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-headless-fable-5.1.md",
+      "sha256": "40fe7a5843bdb1e61dd85750dda7ef34f7742a5c26c52efc98c8a7ebf0b61da2"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-opus-4.6.md",
+      "sha256": "45f23943bbc8d0b0ce403ae1923604fcf80e577030d05c22ed39544b2978019c"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-opus-4.7.md",
+      "sha256": "af7ee73da10b0be798b2bf0186eb4acaedc5ca54c9ffa6584045b514ec71878d"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-opus-4.8.md",
+      "sha256": "f364fd1be2d7fe3e43858c0caa81f4f8dbc7666cea7c6d0fde7451576079a54c"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-opus-5.5.md",
+      "sha256": "549719fcc3d9fa34d7a1fba67d89eb6158f96cc3fe0374d57a50f205a316a170"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-opus-5.md",
+      "sha256": "a509589389c41f3043a1154561a9fc6369b73d63b183c2f164637bdb6105c4d6"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-sonnet-4.6.md",
+      "sha256": "cf74c8e5d0fef0be60bf8f07ebd09e3500e96f3819750b52e40c21c95d78a082"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-sonnet-5.5.md",
+      "sha256": "e63d058f459c20349744542969f21d31a7880a71f15090ce3ec1a2c865725215"
+    },
+    {
+      "sourcePath": "Anthropic/claude-code/claude-code-sonnet-5.md",
+      "sha256": "9a06f96691c98b7992a69a1a99b641bbab7cfb91d4f6e2401fde52cfbf5f45bb"
+    },
+    {
+      "sourcePath": "Anthropic/claude-fable-5.1.md",
+      "sha256": "51cb35962830eeb43f156931e0501ec16df1f9ad3355298039ba5c9f3ce05c82"
+    },
+    {
+      "sourcePath": "Anthropic/claude-fable-5.md",
+      "sha256": "2b7dbdb667bc0f1f0ddc3c662f389c828b803d666c2526fb6f50686c6194ec02"
+    },
+    {
+      "sourcePath": "Anthropic/claude-for-excel.md",
+      "sha256": "fa07c00b7816a1001cf92ff268de880c4ed08038692126effbf6bf798fe51564"
+    },
+    {
+      "sourcePath": "Anthropic/claude-for-word.md",
+      "sha256": "99fbf1a67c62ffe81864a178af21477b09cd632446a6e699183fcce28169a3ef"
+    },
+    {
+      "sourcePath": "Anthropic/claude-haiku-5.5.md",
+      "sha256": "acd8bdf9880733faafc173bf4b72088213907a6605ac1a513433f0be36e05f1b"
+    },
+    {
+      "sourcePath": "Anthropic/claude-in-chrome.md",
+      "sha256": "2932a9111b99738fb3dc2d808f4b9d7a922d2d1a120745f54b33593a3831c673"
+    },
+    {
+      "sourcePath": "Anthropic/claude-in-powerpoint.md",
+      "sha256": "64733b88b9e3e08d13a7616939fc5bed3c90ccdbdce0a2e55733b72e16f35077"
+    },
+    {
+      "sourcePath": "Anthropic/claude-mobile-ios.md",
+      "sha256": "b257144fe1383e3aa118851cfaa21d465e80657e4c0001f19cd5c5442a005e7d"
+    },
+    {
+      "sourcePath": "Anthropic/claude-opus-4.6-no-tools.md",
+      "sha256": "cc9151e611b21a3a99f2646f03c3f97d009a09ff2f3f2fa4a88bc064e7e301c5"
+    },
+    {
+      "sourcePath": "Anthropic/claude-opus-4.6.md",
+      "sha256": "d3f06cd602688a21674a029a42a6db333a969398085d254b7b8de0679af8e874"
+    },
+    {
+      "sourcePath": "Anthropic/claude-opus-4.7.md",
+      "sha256": "0c26db47adc535b40c5069885772de28480f9d968a797831644a962bd0dd245e"
+    },
+    {
+      "sourcePath": "Anthropic/claude-opus-4.8.md",
+      "sha256": "334be9919e3a6a4b8a674133621f73308deb2c9373139eb05b0dfd9bcbe31f6f"
+    },
+    {
+      "sourcePath": "Anthropic/claude-opus-5.5.md",
+      "sha256": "0c38e40013bec51519b30d9b3b881557b3c497f140a691c4733dc75caa34508e"
+    },
+    {
+      "sourcePath": "Anthropic/claude-opus-5.md",
+      "sha256": "10476af83d8e8b015fca16f453d3deabd2bf92f1278ff0f171168771a22fb439"
+    },
+    {
+      "sourcePath": "Anthropic/claude-projects-thread-claude.md",
+      "sha256": "43e6cd9910cecd8f62deea37755e797cb406879ce4815f5084bb7da4ef31772d"
+    },
+    {
+      "sourcePath": "Anthropic/claude-science.md",
+      "sha256": "3726b916c0b624d220c4b7da5c3424fd83a7ff0bcca21615a7ef01861868204a"
+    },
+    {
+      "sourcePath": "Anthropic/claude-sonnet-4.6-no-tools.md",
+      "sha256": "3aef9902ab67ac190911f0a62a76ea7b272205013d49cfe627ef016bff938baa"
+    },
+    {
+      "sourcePath": "Anthropic/claude-sonnet-4.6.md",
+      "sha256": "e4c7a357d647aeef857ca3a5bcb8e09371d02ca4280d5c3c744eeef518f7d631"
+    },
+    {
+      "sourcePath": "Anthropic/claude-sonnet-5.5.md",
+      "sha256": "5dcd614e10f45950ae7f5d97ae3fea54b6f5b4e9ab9c8daadf4085c9d8d925b4"
+    },
+    {
+      "sourcePath": "Anthropic/claude-sonnet-5.md",
+      "sha256": "853542c2becedd59bdadd7ed2669a467fe2ee70f26720739db4f7b6840d02f92"
+    },
+    {
+      "sourcePath": "Anthropic/claude-voice-mode.md",
+      "sha256": "bd552646c1a991de51fd0f4b216b8d54cbf9a320859a055a3dea6b41bdd0f6c5"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-07-12-claude-haiku-3.md",
+      "sha256": "35fb942e1f52545def52529ccd178bdbcfebeea5f81d7437af8da20fc5fd4e04"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-07-12-claude-opus-3.md",
+      "sha256": "d8b19655a2ae91af65a9da166fa1806d032ae214232f1debda7d7471734642d7"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-07-12-claude-sonnet-3.5-text-and-images.md",
+      "sha256": "23d633701943028081a80e5b56971ccc296da0771d6958073b7e8bf90b26f533"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-09-09-claude-sonnet-3.5-text-and-images.md",
+      "sha256": "4b8693f3fb0e604a0189a80b466f08816723394bc44ab90beb1a3a9d02727844"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-09-09-claude-sonnet-3.5-text-only.md",
+      "sha256": "3cb22e2d9c13a5f39e6f05728a57f262b76eb9d15d529ff522e89fdb86b46513"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-10-22-claude-haiku-3.5-text-only.md",
+      "sha256": "75966c9d5ba6620de7f11c70df5a7145781c2c64ad2ddd5dff6c8556a99d241b"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-10-22-claude-sonnet-3.5-text-and-images.md",
+      "sha256": "9886678c7d54617cc8e3c6adaa908c9eb508e1d9f8043d2fab616207a21f920e"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-10-22-claude-sonnet-3.5-text-only.md",
+      "sha256": "5e421bb9cf9dcedbb3cf16fc2594c76ce501f71b6a2271976a0f13d123b96616"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-11-22-claude-sonnet-3.5-text-and-images.md",
+      "sha256": "5d3ead176b171630b05e552edce1ba0a8d7a92316849467c58a4297e14b9ecae"
+    },
+    {
+      "sourcePath": "Anthropic/official/2024-11-22-claude-sonnet-3.5-text-only.md",
+      "sha256": "308b1afd40c5a6625828e64f03944169f09040927e5b4bb6d733600e0ca6a7e0"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-02-24-claude-haiku-3.5-text-and-images.md",
+      "sha256": "bfdcfaa4730e9f2c8327da074db26b50973ca3566bfb84a6dde73555a150da09"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-02-24-claude-sonnet-3.7.md",
+      "sha256": "d58b0a94fc60db9bd30409668b3e08cbd724bfec7c2a1f8d50e2936992df8e2b"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-05-22-claude-opus-4.md",
+      "sha256": "c3629307274f54f4265d359fe4a3d95dabcaabd7892c62173ca8755181606090"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-05-22-claude-sonnet-4.md",
+      "sha256": "b90cd109f2ce6a2b69bac6f2b18809292e4c4d61c003d826b707ca2f8ecf18e9"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-07-31-claude-opus-4.md",
+      "sha256": "15faed788d22c961f9b759f5966ee007695c0568c18ced85969ebd16c272c361"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-07-31-claude-sonnet-4.md",
+      "sha256": "0c6403601d1523329ba4e5488ab70e90b2bc512be60f4d79bcbb2c2c82b1eb4c"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-08-05-claude-opus-4.1.md",
+      "sha256": "029c8bac5eae59ccaa143ff5673914f6645a5393ddd664aee270f4508e1a0cf1"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-08-05-claude-opus-4.md",
+      "sha256": "15faed788d22c961f9b759f5966ee007695c0568c18ced85969ebd16c272c361"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-08-05-claude-sonnet-4.md",
+      "sha256": "0c6403601d1523329ba4e5488ab70e90b2bc512be60f4d79bcbb2c2c82b1eb4c"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-09-29-claude-sonnet-4.5.md",
+      "sha256": "284aab49613e8a32985f60a4cc0c9448ebc6e65d265b9bc19e3b2f923c9f3182"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-10-15-claude-haiku-4.5.md",
+      "sha256": "806bdac4004f1fb9545a657707a797cbb3b4f516e9823e2a0bbc1f6228d0b51a"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-11-19-claude-haiku-4.5.md",
+      "sha256": "68cf272d8bca5706db280a66cdc729c1e44026782f732173150d6ecb522ba2f7"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-11-19-claude-sonnet-4.5.md",
+      "sha256": "d2fc4303293e628449e92b0b485b82398fb6a68f9756fe4ade32e18adec675df"
+    },
+    {
+      "sourcePath": "Anthropic/official/2025-11-24-claude-opus-4.5.md",
+      "sha256": "0f3bdcb52e309e3c5e2208eb75ecc99c742292f0ca2fa34bb5588f38687effea"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-01-18-claude-haiku-4.5.md",
+      "sha256": "908d3ef2ce50182c449972323108580c61f4c9977e4e4c0fe9cdc58bdd41cbc2"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-01-18-claude-opus-4.5.md",
+      "sha256": "2558f4a91a9b3dee16a7ae0014006782f206c5167f339eb3668d736496f35769"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-01-18-claude-sonnet-4.5.md",
+      "sha256": "60afa3b984cf208a6e00da273fc6f02d6fb4a0370ad2868a13051df01131759c"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-02-05-claude-opus-4.6.md",
+      "sha256": "823fed274529d0485aa0e0915e504a4b85327a6f9932dbb06710b62c76ad73cd"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-02-17-claude-sonnet-4.6.md",
+      "sha256": "77947bb37db67a530cdf8ca8897b175f4f8460063e78876df11b5be4ba525713"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-04-16-claude-opus-4.7.md",
+      "sha256": "5bcc8fa4f765d1ffc0b0192bab22cdb9ec340bb1d84fd2340333385e508c3904"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-05-28-claude-opus-4.8.md",
+      "sha256": "38cb11e6735821a377bebd7eb4a47d6ed6c101df411684879a99c5b5aa3ae63e"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-06-09-claude-fable-5.md",
+      "sha256": "df027443f6da2c3f46fa89d62886d7eddb1675faa9368a659fde9385503f64ce"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-06-30-claude-sonnet-5.md",
+      "sha256": "9a24f49163ab47b1e98fb71dcd4429b382eab8943f77e0869c41ee9d0434b978"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-07-24-claude-opus-5.md",
+      "sha256": "ba25bb278fc53cd23016cd111f8f004d40ec297fc89045a2a721d556afac52cb"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-09-01-claude-fable-5.1.md",
+      "sha256": "94110d36e95d9e9aa0818d94ccf4b52c221cde0b18dfa72c41393439f8b8cd68"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-09-22-claude-opus-5.5.md",
+      "sha256": "221d01ba8df2e020cdec118f4f500b78a0847ae852eab594ec417e3d98437b09"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-09-28-claude-sonnet-5.5.md",
+      "sha256": "cd53f98ad8470ef8f8dc229980e42ddce32091296df76929189021e1d707dc11"
+    },
+    {
+      "sourcePath": "Anthropic/official/2026-10-07-claude-haiku-5.5.md",
+      "sha256": "e93f1eff7aab3ee389bc2d9e00af95c360ee9af3a7c86d811d63c4b9241e15dc"
+    },
+    {
+      "sourcePath": "Anthropic/official/all.md",
+      "sha256": "19b420dc063a0a1c72ef85c2374fad8c26314518179d8680e14ab1cbdfba05e8"
+    },
+    {
+      "sourcePath": "Anthropic/raw/claude-haiku-5.5-raw.md",
+      "sha256": "18a4607d5b1b8e97306fcf0fdc71a5eb232bbaa64ef87a31ff88ba5455cdd362"
+    },
+    {
+      "sourcePath": "Anthropic/raw/claude-opus-4.6-no-tools-raw.md",
+      "sha256": "e1f1d36428b648e752981dc378d0faca62f8a4a1be9cb9e8d17002f07cc17ba3"
+    },
+    {
+      "sourcePath": "Anthropic/raw/claude-opus-4.6-raw.md",
+      "sha256": "d45550a53bd39253ef943d7149eb6e428bd9044db749ea1507ee732887284cbc"
+    },
+    {
+      "sourcePath": "Anthropic/raw/claude-sonnet-4.6-no-tools-raw.md",
+      "sha256": "04a9b4b1e7b2dffa5d91b8cdad6ca785fc19075d760d65935846605cdb27a2c2"
+    },
+    {
+      "sourcePath": "Anthropic/raw/claude-sonnet-4.6-raw.md",
+      "sha256": "78f82018266adbacf8fcb9a129db23ab7d4e1ae767aae17512a86099e34197db"
+    },
+    {
+      "sourcePath": "Anthropic/raw/claude-sonnet-5.5-raw.md",
+      "sha256": "c63ea370efc80c6ce2e3e8dce5c148d905c782fbd2092ff634685c0da919f2bb"
+    },
+    {
+      "sourcePath": "Anthropic/research_instructions.md",
+      "sha256": "605097541b8de4be55b27a6b4292f21ad7a070308f330a81cd7e7e381ebdb809"
+    },
+    {
+      "sourcePath": "Anthropic/sonnet-4.6-reminders.md",
+      "sha256": "0274ecbfb9aff75cb3f7086ed8944d98d189a3f7fa9d631a2451d22722f8ac06"
+    },
+    {
+      "sourcePath": "Anthropic/visualize.md",
+      "sha256": "9078d6aeb3517b6c0d140632449b023731351ae8bbdef7b2a7a3d89b9c312148"
+    },
+    {
+      "sourcePath": "Cursor/cursor.md",
+      "sha256": "d0b29a77fd270b80562eaa91eb79a902658ba248188d07e27d54c1752cdc0ec5"
+    },
+    {
+      "sourcePath": "DeepSeek/deepseek-chat.md",
+      "sha256": "97bae42325c8efc78e84b8c28409953a42d59e76581efe2eacac08c33c5748e2"
+    },
+    {
+      "sourcePath": "Google/ai-studio-build.md",
+      "sha256": "9561fc9650ed25cc774bc8bd639b51cadc1978cb07f2948a150d429132449080"
+    },
+    {
+      "sourcePath": "Google/antigravity-cli.md",
+      "sha256": "7bf1ef5a6fb8e7fc9973ebf1c62d84dbf678e2523512268313b506864eaae274"
+    },
+    {
+      "sourcePath": "Google/gemini-2.0-flash-webapp.md",
+      "sha256": "99f4dc5fdab84dafea89bea6dbccbab9edc02f8afdda60daee01c5e161b88f7a"
+    },
+    {
+      "sourcePath": "Google/gemini-2.5-flash-image-preview.md",
+      "sha256": "f9da83ae9ae7b3295026b2f0218581f35688f87d639f6f7f3bd8ae7e4164e91e"
+    },
+    {
+      "sourcePath": "Google/gemini-2.5-pro-api.md",
+      "sha256": "1421847350330b42bcf352d71c926702aeb7f400fc0f58681cdd87ed3958ea9a"
+    },
+    {
+      "sourcePath": "Google/gemini-2.5-pro-guided-learning.md",
+      "sha256": "d9c91a0942b3ee939190aee62d6d8a04906c286717c0fde87e2f0ed2ef21b26e"
+    },
+    {
+      "sourcePath": "Google/gemini-2.5-pro-webapp.md",
+      "sha256": "0be94092863e2648e056f690d69d5a7131bdbff376b554bc652dde224b5e51a3"
+    },
+    {
+      "sourcePath": "Google/gemini-3-flash.md",
+      "sha256": "1febd6388b113f50526fde27e4627b19dd275d71d365e5eaad840cd5fb45ce48"
+    },
+    {
+      "sourcePath": "Google/gemini-3-pro.md",
+      "sha256": "738e829d60662fd4dce234da4049ac2eacfe221a5bc35cfe8ffa6e389e96f003"
+    },
+    {
+      "sourcePath": "Google/gemini-3.1-pro-api.md",
+      "sha256": "1ed89ebfba22d3c8e7b99e24a4db011be8d70fb6cf4334c4cbc40165b5aa5b75"
+    },
+    {
+      "sourcePath": "Google/gemini-3.1-pro.md",
+      "sha256": "a37ee179e8dc1d57b38ca791d61652b6f409982624459ad38b525180c9812e08"
+    },
+    {
+      "sourcePath": "Google/gemini-3.5-flash-ai-studio.md",
+      "sha256": "fbdfee2c2d35655c1f7ca757b64436df91f7850c2b5ee6cec06a3007c2f3ead1"
+    },
+    {
+      "sourcePath": "Google/gemini-3.5-flash.md",
+      "sha256": "ec7a5e3073fa738fa172c81d61b1f326a55382340fc6128e5c476a2dc3165cf0"
+    },
+    {
+      "sourcePath": "Google/gemini-3.7-flash.md",
+      "sha256": "0fb7fa7f3acf0832635c7dfc04266e8760258da5646943ba1344da7187643a7d"
+    },
+    {
+      "sourcePath": "Google/gemini-3.8-flash.md",
+      "sha256": "39cfd266d0052efe5481fbc9fe6cee5a12a572b50fc06dcfb952341000a28ca4"
+    },
+    {
+      "sourcePath": "Google/gemini-cli.md",
+      "sha256": "c694fed38822fe3045b9c0670df092604fe947723502c00b00ea6a8f488c0539"
+    },
+    {
+      "sourcePath": "Google/gemini-diffusion.md",
+      "sha256": "dd2749cc5714bd8e20878a187e67eb23fb1a598e595aa504cb6e2f5821ec8488"
+    },
+    {
+      "sourcePath": "Google/gemini-in-chrome.md",
+      "sha256": "ac8b825567afa9c57d4df3fb5c27aa7f73579f034c72ce858f79e3c8658a2dc9"
+    },
+    {
+      "sourcePath": "Google/gemini-workspace.md",
+      "sha256": "ca9885c6ec4e717ac4404e085231c53e5be399f0d19907751481713e29f48550"
+    },
+    {
+      "sourcePath": "Google/gemini-youtube.md",
+      "sha256": "6f79d0a38f722677cd28db32ef4b41b1ca3c0eb21b8e77603bbab82d7d31f9ca"
+    },
+    {
+      "sourcePath": "Google/google-search-ai-mode.md",
+      "sha256": "173a7f760e3b8afa1907cdbbfbad33f89f7dc3d66b797872065d412a3242926d"
+    },
+    {
+      "sourcePath": "Google/jules.md",
+      "sha256": "dedcaa2a03553b83915b77b0a7cc398af78bf16f774b38a4ab9ff80d9f79440c"
+    },
+    {
+      "sourcePath": "Google/nano-banana-2-api.md",
+      "sha256": "48062b1af153bb4119f9c32190c214cf7b2ef5fc8d027a772c285d013d06e340"
+    },
+    {
+      "sourcePath": "Google/notebooklm-chat.md",
+      "sha256": "711ce3bb1f2c82c46febd2e886475980dc0a113e30000766143f85aaf8d5f0c4"
+    },
+    {
+      "sourcePath": "Kimi/kimi-2.6.md",
+      "sha256": "24c168790e2839f31ef7ea30e9cb871a784d7a023e0fbb95b421836feda4063e"
+    },
+    {
+      "sourcePath": "Kimi/kimi-3.md",
+      "sha256": "ad1cc66f2577e1767aeca45da439e55cc0c9119ccbbe4747fa4e9efdf401f961"
+    },
+    {
+      "sourcePath": "Meta/muse-spark-1.0-web.md",
+      "sha256": "07a6582a46d363606d001eed955471866d18deea4317dd1f2c13d5f2f7a992ab"
+    },
+    {
+      "sourcePath": "Meta/muse-spark-1.1-web.md",
+      "sha256": "5f14d22d8f1bfa54f49a881114c7df18ab31071ae5e8e430ee0dfbc9dd36286b"
+    },
+    {
+      "sourcePath": "Microsoft/copilot-cli.md",
+      "sha256": "d49c5332d2e699571d5df36ce143b509d8582415da20e781ff817efc460d315f"
+    },
+    {
+      "sourcePath": "Microsoft/copilot-in-microsoft-word.md",
+      "sha256": "bb617c23c7f4d53147aaf0606dbc7b3b5e9afeb122d3cf8155beb1f05b14b131"
+    },
+    {
+      "sourcePath": "Microsoft/copilot-macos-app.md",
+      "sha256": "153cf9b7ec0c03ca7dc6903988228db6951da754dda3efede51b9e0d56e59fbb"
+    },
+    {
+      "sourcePath": "Microsoft/github-copilot.md",
+      "sha256": "01192f63387bd243ddc6ae7cda0023d3750c1a609c81ac86a0f21105b9647c16"
+    },
+    {
+      "sourcePath": "Microsoft/vscode-copilot-agent.md",
+      "sha256": "29a56b7d8c930b2e735c77f0bd1ba1fb348157590e1d5bd5d53b2462264408f5"
+    },
+    {
+      "sourcePath": "Misc/amp-code.md",
+      "sha256": "437da7b7e74c92674abff1ab4d465c2ef0fc94f68b542e1a00745000027ab19c"
+    },
+    {
+      "sourcePath": "Misc/brave-search.md",
+      "sha256": "9a2a10fa854affb02bf09f0215c46cc4f33712ec3e10dbf82616a38f5d4129cd"
+    },
+    {
+      "sourcePath": "Misc/character-ai.md",
+      "sha256": "65a379d6c2c83351a780d843bb9df47e338ab973ceeca0f890fe407b9e587533"
+    },
+    {
+      "sourcePath": "Misc/commandcode-cli.md",
+      "sha256": "90a6a5b6bc82294acdc3ed8325dd9830af929273c43291ce24fe772928e5b9e7"
+    },
+    {
+      "sourcePath": "Misc/confer.md",
+      "sha256": "27d4abbef36bd3f3336d6acba3fca327099d79f1261278e054d49cef9236c021"
+    },
+    {
+      "sourcePath": "Misc/devin-cli.md",
+      "sha256": "03e926e41e373ed5f5dba68660f69e3370ba63209e8bc1195908851fb2f82cef"
+    },
+    {
+      "sourcePath": "Misc/docker-gordon-ai.md",
+      "sha256": "8ef8aec2718b29d59d31c29d75d7f2da9aa5a9e5256c7a2e07a6da6f033d9555"
+    },
+    {
+      "sourcePath": "Misc/elevenlabs-voice-agent.md",
+      "sha256": "634052460fac421a753e4ee61d5963f6415330d5f3b7ea5f4ed14acc54958590"
+    },
+    {
+      "sourcePath": "Misc/fellou-browser.md",
+      "sha256": "4f435d67002357a6b944efc7c811ec84e9a7ab96cda11541f0683e78360703e9"
+    },
+    {
+      "sourcePath": "Misc/gizmo-ai.md",
+      "sha256": "5f6ebb234b3aeb2d01a5a08153d848fd3ae6cd0fb2f29c0a36a312f07e42173a"
+    },
+    {
+      "sourcePath": "Misc/hermes.md",
+      "sha256": "abfa518989a0c94a0e5bbd0a35122968fb6a129ba39e0d8910e373fa2d710e0a"
+    },
+    {
+      "sourcePath": "Misc/indus-ai.md",
+      "sha256": "c08fcd9640543f4dd526d98cd8ccb39353ab98244cc18ea67b98fc0962ea6b6d"
+    },
+    {
+      "sourcePath": "Misc/kagi-assistant.md",
+      "sha256": "5f4f930fec2314cfc3769ab57fd22ef1b4a59ff97604ad2ae10d0c193179af04"
+    },
+    {
+      "sourcePath": "Misc/minimax-m2.5.md",
+      "sha256": "65129f1d2f3c783bdc4974fe7d9dd098e75cb52f57025da8eac924271028b869"
+    },
+    {
+      "sourcePath": "Misc/proton-lumo-ai.md",
+      "sha256": "b59b07b7366bde4eef2c4642dd5887d0d0c381b91a4260dee73a8ada1edaeafa"
+    },
+    {
+      "sourcePath": "Misc/raycast-ai.md",
+      "sha256": "1bb43c47781d5c6acbda026413d0e02f1023d247f8db731fac0b3428d1b6f8c7"
+    },
+    {
+      "sourcePath": "Misc/reddit-answers.md",
+      "sha256": "df4f50ca5586d94d8ac7aad3807b610f2a9fbc1d1a7ec0189b0529226b19d8c2"
+    },
+    {
+      "sourcePath": "Misc/sesame-ai-maya.md",
+      "sha256": "b7e9d9d88e27ea9f180eadae448564b51f12e5003a60451e5cf2bc9fd2b0f162"
+    },
+    {
+      "sourcePath": "Misc/stack-overflow-ai-assist.md",
+      "sha256": "26315f1c89c7328c711cd2609372b5fee5e0070a45467eaaf3c2ebae707e9ff7"
+    },
+    {
+      "sourcePath": "Misc/t3-code.md",
+      "sha256": "016b8620dc76585d9e508b73c142a42074715b1b76c205113823ee791f603ea7"
+    },
+    {
+      "sourcePath": "Misc/t3.chat.md",
+      "sha256": "caf5d34f59e6d49d3a7d1f6ad043c9fc073782c5e04a1f6aff32adc4231033f2"
+    },
+    {
+      "sourcePath": "Misc/warp-2.0-agent.md",
+      "sha256": "8c21064c54c77b54fbafa22b9eb143615fc42938cbd29413bfefdb044308c01c"
+    },
+    {
+      "sourcePath": "Misc/zed.md",
+      "sha256": "03f2960389aab5765561c17358690e93914c03dc7cadaea10c6410e83a951725"
+    },
+    {
+      "sourcePath": "Mistral/mistral-code.md",
+      "sha256": "cc1ed4630d83ac15455c1c4af99140facc01d561dbd63948522bd7eb60f32901"
+    },
+    {
+      "sourcePath": "Mistral/mistral-medium-3.5.md",
+      "sha256": "1d87e3c4155aa703796cd19a8ca0d695be8f57a463a497017b95018b5553cda6"
+    },
+    {
+      "sourcePath": "Notion/notion-ai.md",
+      "sha256": "b14f0c427bf357ca3100475ff083e35b31c242d9ace9364aeee043e0d2afc694"
+    },
+    {
+      "sourcePath": "OpenAI/4o-2025-09-03-new-personality.md",
+      "sha256": "91ca51d4af4245dbf1ee0d56243c4709d909c7acbb2d47e4a30f56490f74bcec"
+    },
+    {
+      "sourcePath": "OpenAI/chatgpt-4.5.md",
+      "sha256": "26c33c135b75e59616bfee8613ccd8635261781b56e5a9abd0586d93fa773834"
+    },
+    {
+      "sourcePath": "OpenAI/chatgpt-4o-deprecation-preparedness-prompt.md",
+      "sha256": "0fef68ffc37c655433b15bf67936254f18bb8dfdbdcd3c732483fce0e85cf267"
+    },
+    {
+      "sourcePath": "OpenAI/chatgpt-atlas.md",
+      "sha256": "3f3a0a9490cf6c8d377eb12452113eb954c21dfb68dc98843cad2fed41ca362f"
+    },
+    {
+      "sourcePath": "OpenAI/chatgpt-gpt-5-agent-mode.md",
+      "sha256": "135c13aadf6a19b809db072c6c2d1e43cf636e11b1df463b6a8ceabf4174f9e9"
+    },
+    {
+      "sourcePath": "OpenAI/chatgpt-personality-instructions.md",
+      "sha256": "65d3fb8ed7b0e3003de2b5523f629bd9b45683608e6a1be5e259a5e36a7749b2"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/codex-auto-review.md",
+      "sha256": "b247d52d7da990f1e4b049a413654762d050b6dc359a7a6bb651d0f49e1971e3"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/codex-desktop-realtime-voice-agent.md",
+      "sha256": "15e7b923e438acbfde115e7aa4b4b273798375b1d87ed3cc637704d794011e1e"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/codex-full.md",
+      "sha256": "156fc3e12b8fc89465fdd2262a4637b4ab32c42e32111d2a47ddce1e7b6668a4"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/codex-thread-title.md",
+      "sha256": "f0856d245284c75a8c30de734f7b106d674549bf1c9e7101332197cb001c2faa"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/computer-use.md",
+      "sha256": "e8c34dc8f9fb03d1af09b71547d607e717b04dac70d6ddc6b4ac941356604045"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/control-chrome.md",
+      "sha256": "d4ede8cb040e59bd9dbc8a016edcc561d1a47f7aa7e34e72f85826a9132b0b60"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/control-in-app-browser.md",
+      "sha256": "af029c39250918c2d5c20e70e72c743a483998869b6689f01063b56ceadf6cf9"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-5.3-codex-spark.md",
+      "sha256": "94c38208346774a334851afcb44b78dacf7449666e109cd6fd0f1edf839b4ff5"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-5.4-mini.md",
+      "sha256": "0394376e4d03e5f5ce6ea7f7ee22de6a5f23fde3a5a9cf21ea35114e18abf0a4"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-5.4.md",
+      "sha256": "b247d52d7da990f1e4b049a413654762d050b6dc359a7a6bb651d0f49e1971e3"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-5.5.md",
+      "sha256": "c13cc50bc068912608769224bf2c5ffcb5f534856fd631f3df0ef72a8a3108a4"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-5.6.md",
+      "sha256": "40f053be80a6ee153b007dc4805d9f480d3847204e80c7f643ee5725054ef42d"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-6-astra-chatgpt-work-local.md",
+      "sha256": "43651d25e1fc389dab94ffdc849317519cb0ee3935c6ca16c28d308019516fdc"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-6-astra.md",
+      "sha256": "6f5b775528233c9b883bf8ab7b8040df5cd13eb3e1a0f1db02f3834c5f042ad1"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-6-luna.md",
+      "sha256": "5f3b9f732bda8d49eda6754deb0a0187b8e26b11fe4c169eb687b2b5a3746f3d"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-6-sol.md",
+      "sha256": "d3f0e98663460859190ad934ef37597763e88d10b21f44eae04a6decfe30d13c"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-6.1-sol-chatgpt-work-local.md",
+      "sha256": "f29b47cb21e840c15ea9a381d861ca61dadc23b3b1fd2fd7df66a41b946bd53a"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/gpt-6.1-sol.md",
+      "sha256": "a1966f58ae8e352bf924180e8717164544a1d1d3181d5850678b9b53173e4ce6"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/personality_friendly_gpt-5.5.md",
+      "sha256": "03e13b1c075befaad7ac82c6757a121aefcafff189b92f14e3d6792c089c4317"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/personality_friendly.md",
+      "sha256": "c8bcd02ba8306c51910e1e7bdb9526b8420763e8400357bd1f273b892cb4023f"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/personality_pragmatic_gpt-5.5.md",
+      "sha256": "a5c7c561f3dc903641b82c1006afa84270b39052d392a7c4bab03bdcd3e96305"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/personality_pragmatic.md",
+      "sha256": "02e479a3bae23a3371492a6a23b2c82ccbd0171738d3cefbe27f37802449a298"
+    },
+    {
+      "sourcePath": "OpenAI/Codex/plan_mode.md",
+      "sha256": "9e81c5f39a29243554320afaddb44e7b7812fdff4abcad9cc65893d8fe8d8b77"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-4.1-mini.md",
+      "sha256": "a8a4596ff4c216a66629e8573b3b746434c67778c222e5c5908cf571b98a5452"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-4.1.md",
+      "sha256": "854fddcd25aaa062a4a316f01474a22371448366c1718bd9c712a9f4a797f15d"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-4.5.md",
+      "sha256": "7beff1251b3526aba44ee4685efbf3bd809fec188ae1e03ff55aa565562754d2"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-4o-advanced-voice-mode.md",
+      "sha256": "a81dfce90430c9b7c523289b94c754b2819dd160afe535b6b8dec7b2d8293a69"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-4o-legacy-voice-mode.md",
+      "sha256": "ec3ed16707a3112b2d1751b368866c45b006af44f8c497fe4807d95c090123e4"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-4o.md",
+      "sha256": "6da42a51d60ad680a7eda3db24de1fbbb96cf5759f53bf3d18b8f0c90da6034e"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5-listener-personality.md",
+      "sha256": "007a2981101dbf19bf871b7e3c9a9f99ba7e4a12fab3d44d923a9f822cc8ec34"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5-nerdy-personality.md",
+      "sha256": "0f8cde0d182ff6cf2a2d0ea578d2cc17492128d7c4e407592ee4030115b496c8"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5-robot-personality.md",
+      "sha256": "d3268665c3c8563b40804bc538e72f92123d321d6d3fa7c3bf0d38f2c277aff5"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5-thinking.md",
+      "sha256": "6506771018c9262c60afcb0d884bf8b63951939e2b4e1deeecef000bb626e4e1"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.1-efficient.md",
+      "sha256": "ceaa10b05ac29023a3fe30cceff7a1e7b42bc69c3462797d723c4b3ebce1d5dc"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.1-nerdy.md",
+      "sha256": "986f01523c24bc02597c944c062af7dc6cf39136182264c5f6b3e1a8d6aa092d"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.1-professional.md",
+      "sha256": "075119ebe08a0ccaa25b3ca20ef7a6e4caf07594b4b87c4b02b75ad094513e2e"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.2-mini-free-account.md",
+      "sha256": "fc5e613910bdfa00a55a3cc186677c53dd3eedb092359eee89ab3e699be12a8e"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.2-thinking.md",
+      "sha256": "293f7d0d6b71589a7437a006c36b98a09975f29f54149b4d720b4aa8f0a094c8"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.3-chat-api.md",
+      "sha256": "1c75e9fe3b3cbb202acee73c461c21b3fb3193ea99c42e45d1c3f8f89f16e827"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.3-codex-api.md",
+      "sha256": "802e2b37b3706b95238b7084fb33da83cdaeec063530f170dc49347f07c6b772"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.3-instant.md",
+      "sha256": "a62ef9273ec19289ed20ded6bf2193c7bc30f66367e14dc2c449113ac5b0452e"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.4-api.md",
+      "sha256": "6326bc83b3085f45f5b87825b3c1652af3e6f270f0a7842cb95b5544d678e9df"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.4-thinking.md",
+      "sha256": "41fd168c8e034ad375e09b3e7e5429504f62428dfcaeee95def61ae76460f63e"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.5-api.md",
+      "sha256": "b3bfdbc7802dca89538008c9b5f9443194948f4838cddba4eb42834be9299c34"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.5-instant.md",
+      "sha256": "217d1fbb453ec9740994286a3ed76ed462f35c0cd5628b9a03e157d8642881b9"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.5-pro-api.md",
+      "sha256": "f11eb334b5d56199f443a26cfa5a29725e423e0598fb305694adb1ed1415ec53"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.5-thinking.md",
+      "sha256": "060e5ee038f65f08ef3bf9eae5dfbe5fbe903ebe6ec564d251829b230c306016"
+    },
+    {
+      "sourcePath": "OpenAI/gpt-5.6-sol.md",
+      "sha256": "5f4ca63d00730919bf0046a627a6eef28bf9fc755b1d8c87ccc058aaac6ace89"
+    },
+    {
+      "sourcePath": "OpenAI/tool-advanced-memory.md",
+      "sha256": "25a970aa6fca76be97fe2a3d010e1934f8a7bddec7c4c035b20d63ba45195d71"
+    },
+    {
+      "sourcePath": "OpenAI/tool-deep-research.md",
+      "sha256": "52308a891b7c0bc7bb5503d6e21c24ea3eae41377bcd68a8e532ae8920a55eac"
+    },
+    {
+      "sourcePath": "Perplexity/comet-browser-assistant.md",
+      "sha256": "35550069fe8e6fdf0d6746f057d877fb0710ea12119be64bf63430a4e1774504"
+    },
+    {
+      "sourcePath": "Perplexity/deep-research.md",
+      "sha256": "2000838d7164bf8fa0fb3a3d63fa161e17c27f4276ff05f50e89d6a5b0a99e7c"
+    },
+    {
+      "sourcePath": "Perplexity/perplexity-ai.md",
+      "sha256": "825a63e686fb4fde2522b003df687acc6b0be7feb6adb28291728215ebaef011"
+    },
+    {
+      "sourcePath": "Perplexity/perplexity-computer.md",
+      "sha256": "3761b4af63659d87057f32594a574c6f23b6bea3495dc7a5d0a1554527712d24"
+    },
+    {
+      "sourcePath": "Perplexity/voice-assistant.md",
+      "sha256": "aa30055e1ceaa390ef1c8eadf1254216f2d26ac4ff1a8402f34ad75a89de216a"
+    },
+    {
+      "sourcePath": "Pi/instructions.md",
+      "sha256": "273ef111e687262e995f89e80a40ef123cf1ba44b91919a1d498bf28f5df3893"
+    },
+    {
+      "sourcePath": "Qwen/qwen3.6-plus.md",
+      "sha256": "360fa4a3000dd0e5f8dca157835f0ed9ea86619c1eb621e255c12f5784618251"
+    },
+    {
+      "sourcePath": "Qwen/qwen3.8-max.md",
+      "sha256": "cc4544648ab13abd1f390fb2666c866f05c95f5f4a8c193e7f13d40fe8d12ef9"
+    },
+    {
+      "sourcePath": "xAI/grok-3.md",
+      "sha256": "7b757c42e9a4b8801aa5de936765fcac5c9854e058df6a4984eb296fcbe09548"
+    },
+    {
+      "sourcePath": "xAI/grok-4-with-new-safety-instructions.md",
+      "sha256": "b0bbc804ded6c70d84532f481bd0bb1307cc4dcd4762ef706e1a1b6a39b1696b"
+    },
+    {
+      "sourcePath": "xAI/grok-4.1-beta.md",
+      "sha256": "1b49ae07c5d671551577c198722b4e2f06f26d67b6cbc38533a3b9537530eda9"
+    },
+    {
+      "sourcePath": "xAI/grok-4.2.md",
+      "sha256": "58ec2b4fe3aec93c6d4327544aa1692cd8f7c5e4a36b454ecee693af5a71f010"
+    },
+    {
+      "sourcePath": "xAI/grok-4.3-beta.md",
+      "sha256": "e4e58e2931592a3b5d98003346f99e248869fe8391a0078e08dd4cce8313fc9d"
+    },
+    {
+      "sourcePath": "xAI/grok-4.5.md",
+      "sha256": "d7a703b5cbe93475afc49a4d15a428feaf453f4d534a10359878378acf8622e7"
+    },
+    {
+      "sourcePath": "xAI/grok-4.6.md",
+      "sha256": "8dc89bb6bebe10548da6029786e9e532053d5ffd402af6079d8ea69664be59e7"
+    },
+    {
+      "sourcePath": "xAI/grok-4.7-cli.md",
+      "sha256": "027b871997e0cbfc1a5f03c90c4a48d55839e43d90540a309e38559c8591db91"
+    },
+    {
+      "sourcePath": "xAI/grok-4.7.md",
+      "sha256": "6c013e5b2f81f69b6a51cc4d3cf2f1f8814ecb9508c9440b7b31d9feda93471c"
+    },
+    {
+      "sourcePath": "xAI/grok-4.md",
+      "sha256": "b8a4c37c24cb1fd0228b9b01e891eeb32f83524d781c20617df4d544d154a44f"
+    },
+    {
+      "sourcePath": "xAI/grok-account.md",
+      "sha256": "4af60ada5e9a0d2f82bd38ac702ebb770b7646d53aa51fc957f3d6676f48e98e"
+    },
+    {
+      "sourcePath": "xAI/grok-api.md",
+      "sha256": "7023cecfd9dfd5906597a9ebce93e69209908d6e93217d43208a1e9a69d1451d"
+    },
+    {
+      "sourcePath": "xAI/grok-bot.md",
+      "sha256": "5cf4d3f7ba98604f37992122e6be01ae00da57dcc447bf838ac27f686650dc0b"
+    },
+    {
+      "sourcePath": "xAI/grok-build.md",
+      "sha256": "90fd7d9117776a6a5f75a9746e6c8f73b6677100a9ecbbd5304940deb400bde5"
+    },
+    {
+      "sourcePath": "xAI/grok-expert.md",
+      "sha256": "dd0455f43780dcb9cb2326427ffb565b6ce8c7951d87ae088ca180ea8d78ecf3"
+    },
+    {
+      "sourcePath": "xAI/grok-personas.md",
+      "sha256": "5388cc21c280b203bb5fc20761c6cd9926d1071d6eae369e7bdc6d9ebc97b15a"
+    }
+  ]
+}

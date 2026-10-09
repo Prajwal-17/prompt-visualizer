@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/asgeirtj/system_prompts_leaks",
+  "branch": "main",
+  "commit": "e31ec211bc24a2816b03470c61eb7f513c710d2a",
+  "license": "CC0-1.0",
+  "selection": "Ordered curated selection in content/captures.json. The independent source manifest validates all original prompt documents; the full upstream snapshot is vendored in .repos/system_prompts_leaks."
+}

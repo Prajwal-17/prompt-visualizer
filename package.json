@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
-    "build": "next build",
+    "build": "pnpm generate && next build",
     "typecheck": "next typegen && tsc --noEmit -p tsconfig.build.json",
     "lint": "eslint app next.config.ts",
     "format": "prettier --write . --ignore-path .gitignore --ignore-path .prettierignore",
-    "format:check": "prettier --check . --ignore-path .gitignore --ignore-path .prettierignore"
+    "format:check": "prettier --check . --ignore-path .gitignore --ignore-path .prettierignore",
+    "generate": "tsx scripts/generate-prompts.ts",
+    "predev": "pnpm generate",
+    "test": "tsx --test tests/content.test.ts",
+    "sync:prompts": "bash scripts/sync-prompts.sh"
   },
   "engines": {
     "node": ">=22"
