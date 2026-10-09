@@ -184,8 +184,8 @@ components:
   contents-rail:
     backgroundColor: "{colors.background}"
     textColor: "{colors.foreground}"
-    padding: 0 0 0 24px
-    width: 260px
+    padding: 28px 24px
+    width: 320px
   contents-drawer:
     backgroundColor: "{colors.background}"
     textColor: "{colors.foreground}"
@@ -222,13 +222,13 @@ components:
 
 The familiar document reader puts original text and comparable measurements at the center. The existing light palette keeps blue interactions; dark mode uses neutral black surfaces and off-white text. Locally hosted Inter carries prose and controls, while Geist Mono distinguishes literal source and measurements.
 
-The centered reader pairs a generous text column with searchable, grouped Contents on the right. Flat provider and model groups, explicit capture variants, and compact controls keep source material prominent. This document records the current CSS and components.
+The centered reader pairs a generous text column with searchable, grouped Contents docked to the right viewport edge. Its adjustable width leaves room for original prose. Flat provider and model groups, explicit capture variants, and compact controls keep source material prominent. This document records the current CSS and components.
 
 **Key Characteristics:**
 
 - Preserved light colors and neutral black dark surfaces.
 - Original prose at 17px with a 1.85 line-height.
-- Grouped Contents beside the reader, with a toolbar drawer trigger on smaller screens.
+- Grouped Contents fixed to the right viewport edge with adjustable width, and a toolbar drawer trigger on smaller screens.
 - Solid composition colors paired with names and measured values.
 - Flat library groups and searchable capture selection.
 
@@ -274,11 +274,11 @@ Selection mixes primary at 22%; placeholders use full-opacity muted foreground. 
 
 ## Layout
 
-The sticky header is 64px high. The outer application frame caps at 1480px and the header frame at 1680px. Reader and library containers cap at 1180px, with 20px, 36px, and 40px horizontal gutters across the base, small, and large breakpoints.
+The sticky header is 64px high and its inner frame caps at 1680px. The application main spans the available viewport width. The reader reserves the desktop Contents width on the right and centers its own region within the remaining space. That region caps at 860px, with 20px horizontal gutters on phones and 40px from 640px upward; at its maximum, the prose has 780px of usable width. Reader top padding is 28px, increasing to 40px at 1024px, with 64px below. The library retains its 1180px container and 20px, 36px, and 40px horizontal gutters across the base, small, and large breakpoints.
 
-At 1024px, the reader uses a text column up to 740px, a 48px gap, and a 260px right Contents column. Contents sticks 96px from the viewport top behind a thin left divider and 24px inset. The centered container has no left collection sidebar; capture selection sits above the title.
+At 1024px, Contents is fixed from 64px below the viewport top to the bottom, flush with the right viewport edge. There is no outer gutter beside it. The panel has a thin left divider, 28px vertical padding, 24px horizontal padding, and stack level 30. Its default width is 320px; resizing is bounded from 240px to 520px and additionally capped at viewport width minus 640px to preserve the reader region. The centered reader has no left collection sidebar; capture selection sits above the title.
 
-Below that breakpoint, Contents becomes a full-height right drawer capped at 360px. Its trigger lives beside the actions in the sticky Read/Structure/Raw toolbar, which sits below the header at 64px. The same search and grouped section navigation serve both placements. Contents lists scroll within `calc(100svh - 230px)`; the root HTML owns a 10rem anchor scroll-padding below 640px to clear the wrapped phone toolbar, and 8rem above. Source sections use zero scroll-margin to avoid doubling that offset.
+Below that breakpoint, Contents becomes a full-height right drawer capped at 360px. Its trigger lives beside the actions in the sticky Read/Structure/Raw toolbar, which sits below the header at 64px. The same search and grouped section navigation serve both placements. The desktop list fills the space left below its heading and search field and scrolls independently; the drawer's inner region uses `calc(100svh - 100px)`. The root HTML owns a 10rem anchor scroll-padding below 640px to clear the wrapped phone toolbar, and 8rem above. Source sections use zero scroll-margin to avoid doubling that offset.
 
 Library entries group by provider and model/product. Rows stack on phones, add a variant column at 640px, and expose compact composition at 1024px. Comparison caps at 1152px: its labeled fields stack on phones and align around a centered 40px swap control from 640px; source panes become two columns at 768px. Tables, code, and raw text scroll within their own surfaces.
 
@@ -312,11 +312,17 @@ The library search is a 48px card-tone field with a thin border and containing f
 
 Main navigation uses a foreground active underline. Read, Structure, and Raw use line tabs in the sticky toolbar; the smaller-screen Contents trigger remains available there while reading. Contents searches section labels and source text. Chapter groups expand around the active section and may be expanded independently; search shows matching sections directly. Choosing a section returns to Read, updates location, scrolls, and focuses the destination; re-selecting the active section retriggers scrolling and focus. A drawer selection closes without returning focus to its trigger.
 
+The desktop panel's left divider has a 12px resize target with a small grip and a neutral hover/focus surface. Dragging horizontally adjusts the panel width. Its focusable vertical separator exposes the current width and bounds: Left Arrow widens and Right Arrow narrows by 16px, Home and End select the bounds, and double-click restores the default. The preference persists under `prompt-contents-width` in local storage, with a session fallback if storage is unavailable. Width updates follow animation frames during dragging; content remains independent of the resize control.
+
 Section reading is the default and renders a chapter with its nested sections. Short opening text stays with the first chapter; previous/next controls move between chapter roots. Continuous reading exposes all sections and observes the visible location. Long source sections can expand from a readable excerpt. Composition is a collapsed disclosure with solid category bars, names, and measurements.
+
+Safe Markdown is compiled during content generation and delivered in eight-section batches. The initial batch is available with the reader; other sections load as they approach within 900px of the viewport, replacing restrained title-and-line placeholders. Selecting a distant section loads it eagerly and focuses it when ready. Expanded long sections load their complete body on demand, with an explicit loading label and retry action on failure. Browser content visibility also defers work for off-screen source sections and instruction rows.
+
+Contents creates a full-text search worker on the first nonempty query. Title matches remain immediately available while source-text results arrive; a status line reports searching, result count, or a fallback to title matches if full-text search fails. Search results update independently of section rendering.
 
 ### Structure, raw source, and provenance
 
-Structure presents audited source layers and instruction-section tables. Layer counts partition the original capture; the reader count encodes the selected instruction span separately. Raw shows exact original text with its original-file token and byte totals, wrapping and line-number controls. Copy and download use the original capture. Keep these measurement scopes visibly distinct and retain the named tokenizer caveat.
+Structure presents audited source layers and instruction-section tables. Layer counts partition the original capture; the reader count encodes the selected instruction span separately. Raw loads its view and exact original text when selected, showing an explicit loading status and retry action on failure. It retains original-file token and byte totals, wrapping and line-number controls. Its monospace source region scrolls within 75svh and remains separate from Contents updates. Copy also loads the original capture on demand; download links to the original. Keep these measurement scopes visibly distinct and retain the named tokenizer caveat.
 
 Sources remain inert data. The UI distinguishes contributed sources, community captures, and published archives; mirrored publication archives do not receive an independent official-verification claim. Source code remains text with copy controls.
 
@@ -330,7 +336,7 @@ Tooltips use inverse theme colors, an 8px offset, and the existing 250ms opening
 
 - **Do** preserve exact light tokens and use neutral black dark surfaces with off-white text.
 - **Do** retain the original prose size and line-height in a bounded, fluid column.
-- **Do** keep grouped Contents searchable and its smaller-screen trigger in the sticky toolbar.
+- **Do** keep grouped Contents searchable, dock its desktop panel to the right viewport edge, preserve its resize controls, and keep its smaller-screen trigger in the sticky toolbar.
 - **Do** show capture variants and distinguish instruction-span measurements from exact original-file measurements.
 - **Do** pair composition color with labels, preserve source attribution, and keep imported content inert.
 

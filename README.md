@@ -18,7 +18,7 @@ Development generates local content assets before starting Next.js. In this clou
 
 - 16 model/product entries with 22 explicitly labeled captures across five providers.
 - Provider filters, model/product search, token sorting, and Ctrl/⌘ K search.
-- Section or continuous Markdown reading, a searchable right-hand Contents panel (drawer on phones), Structure and Raw views, direct section links, and exact original-text copying/downloads.
+- Section or continuous Markdown reading, a searchable Contents panel docked to the right edge (drawer on phones), Structure and Raw views, direct section links, and exact original-text copying/downloads. Drag the panel divider or use its arrow keys to resize it; the width is remembered.
 - Token/byte composition bars with hover and keyboard-focus details, in light and dark themes.
 - Two-prompt comparison with absolute or equal-width bars, category counts, and size differences. Only the chosen pair's source text loads when opened.
 
@@ -42,11 +42,13 @@ pnpm build:workers
 pnpm preview:workers
 
 # Static export
-pnpm build:pages
-pnpm preview:pages
+DEPLOY_TARGET=pages pnpm build
+pnpm exec wrangler pages dev out
 ```
 
-Workers uses OpenNext and the `ASSETS` binding to load one selected document per request. Pages exports each route to `out/`; navigation loads the chosen route's payload. Prompt links disable prefetching. Pages does not provide request-time SSR for these Next.js routes.
+Workers is the primary deployment target. OpenNext uses the `ASSETS` binding to load the selected reader index and initial section batch per request. The optional Pages mode exports each route to `out/`. Prompt links disable prefetching. Pages does not provide request-time SSR for these Next.js routes.
+
+Markdown is compiled into inert, escaped HTML during generation. The initial page contains section metadata and the first eight-section batch; additional batches load near the viewport. Full long sections, original text, comparison panes, and validation code load when requested. Memoized sections and CSS containment keep navigation and scrolling from re-parsing the prompt. Contents searches a separately loaded index in a Web Worker, with immediate title matches.
 
 See [deployment instructions](docs/deployment.md). Build the two targets sequentially because they share `.next/`. Installation and local previews do not publish the website.
 

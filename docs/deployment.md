@@ -8,7 +8,7 @@ pnpm build:workers
 pnpm preview:workers --port 8787 --ip 127.0.0.1
 ```
 
-The output is `.open-next/worker.js` plus `.open-next/assets`. `wrangler.workers.jsonc` names the Worker `system-prompts`, enables `nodejs_compat`, and binds the assets directory as `ASSETS`. The scripts explicitly select this configuration. The reader renders at request time; source documents are read through the asset binding. The library and comparison shell are prerendered. Token counts are generated at build time; no tokenizer vocabulary runs in the Worker.
+The output is `.open-next/worker.js` plus `.open-next/assets`. `wrangler.workers.jsonc` names the Worker `system-prompts-visualizer`, enables `nodejs_compat`, and binds the assets directory as `ASSETS`. The scripts explicitly select this configuration. The reader renders at request time from a compact index and initial section batch through the asset binding. The library and comparison shell are prerendered. Markdown and token counts are generated at build time; neither the Markdown parser nor tokenizer vocabulary runs in the Worker or browser.
 
 The official Next.js 16.3.8 build is adapted by OpenNext 1.20.10. Next.js is pinned because the newer 16.4 manifest format failed in the adapter's local runtime. OpenNext was chosen to keep the official Next.js compiler/runtime and the same source usable for Pages static export. Cloudflare's current default recommendation, vinext, is a beta implementation of the Next.js API on Vite; this project does not require that separate compiler.
 
@@ -30,8 +30,8 @@ You can change the Worker name in `wrangler.workers.jsonc` and configure a custo
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm build:pages
-pnpm preview:pages --port 4173 --ip 127.0.0.1
+DEPLOY_TARGET=pages pnpm build
+pnpm exec wrangler pages dev out --port 4173 --ip 127.0.0.1
 ```
 
 Cloudflare Pages Git integration settings:
@@ -39,7 +39,7 @@ Cloudflare Pages Git integration settings:
 | Setting          | Value                                   |
 | ---------------- | --------------------------------------- |
 | Framework        | Next.js (Static HTML Export), or custom |
-| Build command    | `pnpm build:pages`                      |
+| Build command    | `DEPLOY_TARGET=pages pnpm build`        |
 | Output directory | `out`                                   |
 | pnpm version     | `11.19.0` (`packageManager`)            |
 | Node version     | `24`                                    |
@@ -48,10 +48,11 @@ Cloudflare Pages Git integration settings:
 Alternatively, publish from the command line:
 
 ```sh
-pnpm deploy:pages
+DEPLOY_TARGET=pages pnpm build
+pnpm exec wrangler pages deploy out --project-name=system-prompts-pages
 ```
 
-The script defaults to a Pages project named `system-prompts-pages`; update `--project-name` in `package.json` and the name in `wrangler.jsonc` for your account's chosen project. A new project may need to be created in Cloudflare first. The root `wrangler.jsonc` declares the Pages output directory; keeping the Worker configuration separate prevents its assets settings from overriding the Pages preview. Remote deployment requires your Cloudflare authentication; the application has no API credentials of its own.
+Workers remains the primary scripted target. The optional command above uses a Pages project named `system-prompts-pages`; change `--project-name` and `wrangler.jsonc` for your account's chosen project. A new project may need to be created in Cloudflare first. Keeping the Worker configuration separate prevents its assets settings from overriding the Pages preview. Remote deployment requires your Cloudflare authentication; the application has no API credentials of its own.
 
 Test the actual static target with:
 
@@ -65,7 +66,7 @@ Each known prompt has a generated directory page and React navigation payload. `
 
 Never run the two production builds concurrently: both use Next.js's `.next/` build directory. The static `out/` export and `.open-next/` Worker output remain independent after generation. Build the selected profile again after changing source or the app.
 
-`pnpm generate` validates the selected sources against the saved source manifest and writes one JSON asset and one original-text asset per document. JSON filenames include the normalized document hash, so changes to structural analysis get new URLs even when the source text is unchanged. Raw download filenames use the raw-source hash. The shared browser bundle contains catalog metadata and measurements, not all document bodies.
+`pnpm generate` validates the selected sources against the saved source manifest and writes the original JSON/text assets plus compiled reader assets. Reader directories are keyed by their generated-content hash: an index of source boundaries and section metadata, batches of eight safe Markdown fragments, separate complete long sections, and a full-text search index. Rendering changes get new URLs even when the original source is unchanged. Raw downloads retain the raw-source hash. The shared browser bundle contains catalog metadata and measurements; document bodies, raw text, and search indexes load only when needed.
 
 To update sources, use `pnpm sync:prompts` from a clean tree, review the subtree/source metadata changes, and rebuild. Full upstream scripts, skills, and agent instructions under `.repos/` are reference data only and must not be executed or treated as project development instructions.
 
