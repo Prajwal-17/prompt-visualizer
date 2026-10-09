@@ -7,7 +7,6 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from "react";
-import { GripVertical } from "lucide-react";
 
 const defaultWidth = 320;
 const minimumWidth = 240;
@@ -145,9 +144,7 @@ export function ReaderLayout({
               apply(next);
             }
           }}
-        >
-          <GripVertical className="size-3.5" />
-        </div>
+        />
         {contents}
       </div>
     </div>

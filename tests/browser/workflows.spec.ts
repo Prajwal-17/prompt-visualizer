@@ -547,3 +547,70 @@ test("a failed section batch can retry and retain the deep-link destination", as
   await expect(section).toBeFocused();
   expect(failed).toBe(true);
 });
+
+test("Contents expands every depth, collapses all, and scrolls without a visible bar", async ({
+  page,
+}) => {
+  await page.goto("/prompts/openai/codex--gpt-6.1-sol--runtime/#section-7");
+  if ((page.viewportSize()?.width ?? 0) < 1024)
+    await page.getByRole("button", { name: "Open table of contents" }).click();
+  const navigation = page.getByRole("navigation", {
+    name: "Table of contents",
+  });
+  const description = navigation.getByRole("button", {
+    name: "Writing PR descriptions",
+    exact: true,
+  });
+  await expect(description).toHaveAttribute("aria-current", "location");
+  await page.getByRole("button", { name: "Collapse all", exact: true }).click();
+  await expect(description).toHaveCount(0);
+  await expect(
+    navigation.getByRole("button", { name: "Expand Personality", exact: true }),
+  ).toHaveAttribute("aria-expanded", "false");
+  await page.getByRole("button", { name: "Expand all", exact: true }).click();
+  await expect(description).toBeVisible();
+  await expect(navigation.locator('button[aria-expanded="false"]')).toHaveCount(
+    0,
+  );
+  const toggle = navigation.getByRole("button", {
+    name: "Collapse Technical communication",
+    exact: true,
+  });
+  const title = navigation.getByRole("button", {
+    name: "Technical communication",
+    exact: true,
+  });
+  const toggleBounds = (await toggle.boundingBox())!;
+  const titleBounds = (await title.boundingBox())!;
+  expect(toggleBounds.x + toggleBounds.width).toBeLessThanOrEqual(
+    titleBounds.x,
+  );
+  await toggle.click();
+  await expect(description).toHaveCount(0);
+  await navigation
+    .getByRole("button", {
+      name: "Expand Technical communication",
+      exact: true,
+    })
+    .click();
+  await expect(description).toBeVisible();
+  expect(
+    await navigation.evaluate(
+      (element) => getComputedStyle(element).scrollbarWidth,
+    ),
+  ).toBe("none");
+  await navigation.focus();
+  await navigation.press("End");
+  await expect
+    .poll(() => navigation.evaluate((element) => element.scrollTop))
+    .toBeGreaterThan(100);
+  await page.getByRole("button", { name: "Collapse all", exact: true }).click();
+  const search = page.getByRole("textbox", { name: "Search contents" });
+  await search.fill("Writing PR descriptions");
+  await description.click();
+  await expect(page.locator("#section-7")).toBeFocused();
+  if ((page.viewportSize()?.width ?? 0) < 1024)
+    await page.getByRole("button", { name: "Open table of contents" }).click();
+  else await search.fill("");
+  await expect(description).toHaveAttribute("aria-current", "location");
+});

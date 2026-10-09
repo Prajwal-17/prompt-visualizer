@@ -24,7 +24,7 @@ People who want to read and compare the instructions used by major AI products, 
 
 ## Confirmed visual commitments
 
-Preserve the existing light palette. Dark mode uses neutral black surfaces and white/off-white text. Keep solid composition colors, readable Inter typography, and standard navigation. Center the Markdown reader beside a spacious, searchable right-hand Contents panel; use a drawer on phones. Section reading is the default, with continuous reading available. Group library entries by provider/model and expose capture variants and token counts. Comparison selectors are searchable comboboxes with aligned fields and a centered swap control.
+Preserve the existing light palette. Dark mode uses neutral black surfaces and white/off-white text. Keep solid composition colors, readable Inter typography, and standard navigation. Center the Markdown reader beside a spacious, searchable right-hand Contents panel; use a drawer on phones. Contents uses left-side disclosure toggles, nested heading levels, and Expand all/Collapse all controls. Hide its scrollbar and resize grip while preserving scrolling and horizontal resizing. Section reading is the default, with continuous reading available. Group library entries by provider/model and expose capture variants and token counts. Comparison selectors are searchable comboboxes with aligned fields and a centered swap control.
 
 ## Source evidence
 

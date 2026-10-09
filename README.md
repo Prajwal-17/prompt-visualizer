@@ -18,7 +18,7 @@ Development generates local content assets before starting Next.js. In this clou
 
 - 16 model/product entries with 22 explicitly labeled captures across five providers.
 - Provider filters, model/product search, token sorting, and Ctrl/⌘ K search.
-- Section or continuous Markdown reading, a searchable Contents panel docked to the right edge (drawer on phones), Structure and Raw views, direct section links, and exact original-text copying/downloads. Drag the panel divider or use its arrow keys to resize it; the width is remembered.
+- Section or continuous Markdown reading, a searchable Contents panel docked to the right edge (drawer on phones), Structure and Raw views, direct section links, and exact original-text copying/downloads. Contents follows nested headings with left-side toggles and Expand all/Collapse all controls. Drag the panel divider or use its arrow keys to resize it; the width is remembered.
 - Token/byte composition bars with hover and keyboard-focus details, in light and dark themes.
 - Two-prompt comparison with absolute or equal-width bars, category counts, and size differences. Only the chosen pair's source text loads when opened.
 

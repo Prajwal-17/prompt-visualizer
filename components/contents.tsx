@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
 import { ChevronDown, ListTree, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +20,37 @@ export function sectionTitle(section: Section) {
     ? section.label.replaceAll("_", " ")
     : section.label;
 }
+type ContentsNode = { section: Section; children: ContentsNode[] };
+
+function contentsTree(sections: Section[]) {
+  const roots = groupChapters(sections).map((group) => {
+    const root: ContentsNode = { section: group.root, children: [] };
+    const stack = [root];
+    for (const section of group.sections) {
+      if (section.id === group.root.id) continue;
+      while (stack.length > 1 && stack.at(-1)!.section.depth >= section.depth)
+        stack.pop();
+      const node: ContentsNode = { section, children: [] };
+      stack.at(-1)!.children.push(node);
+      if (section.kind !== "preamble") stack.push(node);
+    }
+    return root;
+  });
+  const parents = new Map<string, string[]>();
+  const branches: string[] = [];
+  function visit(nodes: ContentsNode[], ancestors: string[]) {
+    for (const node of nodes) {
+      parents.set(node.section.id, ancestors);
+      if (node.children.length) {
+        branches.push(node.section.id);
+        visit(node.children, [...ancestors, node.section.id]);
+      }
+    }
+  }
+  visit(roots, []);
+  return { roots, parents, branches };
+}
+
 function ContentsList({
   sections,
   searchAsset,
@@ -33,6 +64,8 @@ function ContentsList({
 }) {
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const treeId = useId();
+  const navigation = useRef<HTMLElement>(null);
   const worker = useRef<Worker>(null);
   const sequence = useRef(0);
   const [result, setResult] = useState<{
@@ -76,16 +109,22 @@ function ContentsList({
         }),
       );
   }, [searchAsset, term]);
-  const groups = useMemo(
-    () =>
-      groupChapters(sections).map((group) => ({
-        root: group.root,
-        children: group.sections.filter(
-          (section) => section.id !== group.root.id,
-        ),
-      })),
-    [sections],
-  );
+  const tree = useMemo(() => contentsTree(sections), [sections]);
+  const activeParents = active ? (tree.parents.get(active) ?? []) : [];
+  function isExpanded(id: string) {
+    return expanded[id] ?? (active === id || activeParents.includes(id));
+  }
+  const expandedCount = tree.branches.filter(isExpanded).length;
+  useEffect(() => {
+    const nav = navigation.current;
+    const selected = nav?.querySelector('[aria-current="location"]');
+    if (!nav || !selected || term) return;
+    const bounds = nav.getBoundingClientRect();
+    const item = selected.getBoundingClientRect();
+    if (item.top < bounds.top) nav.scrollTop += item.top - bounds.top;
+    else if (item.bottom > bounds.bottom)
+      nav.scrollTop += item.bottom - bounds.bottom;
+  }, [active, term]);
   const visible = useMemo(() => {
     if (!term) return sections;
     const matches = new Set(result.query === term ? result.matches : []);
@@ -94,85 +133,143 @@ function ContentsList({
         matches.has(section.id) || section.label.toLowerCase().includes(term),
     );
   }, [result, sections, term]);
-  function item(section: Section, child = false) {
+  function select(section: Section) {
+    const ancestors = tree.parents.get(section.id) ?? [];
+    if (ancestors.length)
+      setExpanded((previous) => ({
+        ...previous,
+        ...Object.fromEntries(ancestors.map((id) => [id, true])),
+      }));
+    onSelect(section.id);
+  }
+  function item(section: Section) {
     return (
       <button
         type="button"
         key={section.id}
-        onClick={() => onSelect(section.id)}
+        onClick={() => select(section)}
         aria-current={active === section.id ? "location" : undefined}
-        className={cn(
-          "w-full rounded-md px-3 py-2.5 text-left text-[13px] leading-5 hover:bg-muted",
-          child && "pl-5",
-          active === section.id
-            ? "bg-accent font-medium text-accent-foreground"
-            : "text-muted-foreground",
-        )}
+        className="contents-link"
       >
         {sectionTitle(section)}
       </button>
     );
   }
+  function row(node: ContentsNode, depth = 0) {
+    const { section, children } = node;
+    const open = isExpanded(section.id);
+    const childrenId = `${treeId}-${section.id}`;
+    return (
+      <li key={section.id}>
+        <div
+          className={cn(
+            "contents-row",
+            active === section.id && "contents-row-active",
+          )}
+          style={{ paddingLeft: `${depth * 12}px` }}
+        >
+          {children.length ? (
+            <button
+              type="button"
+              aria-label={`${open ? "Collapse" : "Expand"} ${sectionTitle(section)}`}
+              aria-expanded={open}
+              aria-controls={childrenId}
+              onClick={() =>
+                setExpanded((previous) => ({
+                  ...previous,
+                  [section.id]: !open,
+                }))
+              }
+              className="contents-toggle"
+            >
+              <ChevronDown
+                aria-hidden="true"
+                className={cn("size-3.5", !open && "-rotate-90")}
+              />
+            </button>
+          ) : (
+            <span aria-hidden="true" />
+          )}
+          {item(section)}
+        </div>
+        {children.length > 0 && (
+          <ul id={childrenId} hidden={!open}>
+            {open && children.map((child) => row(child, depth + 1))}
+          </ul>
+        )}
+      </li>
+    );
+  }
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="mb-5 flex items-center justify-between">
-        <h2 className="text-sm font-semibold">On this page</h2>
+      <div className="mb-4 flex shrink-0 items-center justify-between gap-3">
+        <h2 className="text-sm font-semibold">Contents</h2>
         <span className="font-mono text-xs text-muted-foreground">
           {sections.length}
         </span>
       </div>
-      <label className="mb-4 flex items-center gap-2 rounded-lg border bg-card px-3 focus-within:ring-1 focus-within:ring-ring">
+      <label className="flex shrink-0 items-center gap-2 rounded-lg border bg-card px-3 focus-within:ring-1 focus-within:ring-ring">
         <Search className="size-3.5 shrink-0 text-muted-foreground" />
         <input
           aria-label="Search contents"
           placeholder="Find a section or text…"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          className="h-10 min-w-0 flex-1 bg-transparent text-xs outline-none"
+          className="h-10 min-w-0 flex-1 bg-transparent text-[13px] outline-none"
         />
       </label>
+      <div className="mb-3 mt-2 flex shrink-0 items-center gap-1 border-b pb-3">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="px-2 text-xs text-muted-foreground transition-none"
+          disabled={Boolean(term) || expandedCount === tree.branches.length}
+          onClick={() =>
+            setExpanded(
+              Object.fromEntries(tree.branches.map((id) => [id, true])),
+            )
+          }
+        >
+          Expand all
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="px-2 text-xs text-muted-foreground transition-none"
+          disabled={Boolean(term) || expandedCount === 0}
+          onClick={() =>
+            setExpanded(
+              Object.fromEntries(tree.branches.map((id) => [id, false])),
+            )
+          }
+        >
+          Collapse all
+        </Button>
+      </div>
       <nav
+        ref={navigation}
         aria-label="Table of contents"
-        className="min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain pr-1"
+        tabIndex={0}
+        className="contents-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain rounded-md"
       >
-        {query.trim()
-          ? visible.map((section) => item(section))
-          : groups.map(({ root, children }) => {
-              const isExpanded =
-                expanded[root.id] ??
-                (active === root.id ||
-                  children.some((section) => section.id === active));
-              return (
-                <div key={root.id}>
-                  <div className="flex items-start gap-0.5">
-                    {item(root)}
-                    {children.length > 0 && (
-                      <button
-                        type="button"
-                        aria-label={`${isExpanded ? "Collapse" : "Expand"} ${sectionTitle(root)}`}
-                        aria-expanded={isExpanded}
-                        onClick={() =>
-                          setExpanded((previous) => ({
-                            ...previous,
-                            [root.id]: !isExpanded,
-                          }))
-                        }
-                        className="mt-1.5 shrink-0 rounded p-1.5 text-muted-foreground hover:bg-muted"
-                      >
-                        <ChevronDown
-                          className={cn(
-                            "size-3.5",
-                            !isExpanded && "-rotate-90",
-                          )}
-                        />
-                      </button>
-                    )}
-                  </div>
-                  {isExpanded && children.map((section) => item(section, true))}
-                </div>
-              );
-            })}
-        {!visible.length && (
+        {term ? (
+          <ul>
+            {visible.map((section) => (
+              <li
+                key={section.id}
+                className={cn(
+                  "contents-row contents-search-result",
+                  active === section.id && "contents-row-active",
+                )}
+              >
+                {item(section)}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul>{tree.roots.map((node) => row(node))}</ul>
+        )}
+        {!visible.length && (!term || result.query === term) && (
           <p className="px-3 py-6 text-sm text-muted-foreground">
             No matching sections.
           </p>
